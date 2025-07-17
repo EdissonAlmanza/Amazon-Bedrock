@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>My Bedrock API Test</h2>
+    <textarea id="input" rows="5" cols="40"></textarea><br>
+    <button onclick="callApi()">Send</button>
+    <pre id="output"></pre>
+
+    <script>
+      async function callApi() {
+        const input = document.getElementById('input').value;
+        const response = await fetch(' https://ky8cblrs73.execute-api.us-east-1.amazonaws.com/prod/text?points=3', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ text: input })
+        });
+        const data = await response.json();
+        document.getElementById('output').innerHTML = (data.summary || "").replace(/\n/g, "<br>");
+      }
+    </script>
+  </body>
+</html>
